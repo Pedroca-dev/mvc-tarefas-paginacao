@@ -9,7 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "dotenv": "^17.2.2",
+    "dotenv": "^17.4.2",
     "ejs": "^3.1.10",
     "express": "^4.21.2",
     "moment": "^2.30.1",
