@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Home - Lista Tarefas</title>
+    <link rel="stylesheet" href="css/estilo.css">
+</head>
+
+<body>
+    <h1>Lista de Tarefas</h1>
+
+    <button onclick="window.location='/nova-tarefa'">Nova tarefa</button> 
+    <br>
+    <br>
+    <table> 
+        <thead>
+            <tr>
+                <th>ID tarefa</th>
+                <th>Nome tarefa</th>
+                <th>Prazo tarefa</th>
+                <th>Situação tarefa</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <% if(listaTarefas){ 
+                let situacao = ["Cancelada","Pendente","Iniciada","Finalizada","Em Atraso"]
+                listaTarefas.forEach( (item)=>{
+                    %>
+                <tr>
+                    <td><%= item.id_tarefa %></td>
+                    <td><%= item.nome_tarefa %></td>
+                    <td><%= moment(item.prazo_tarefa).format('L') %></td>
+                    <td><%= situacao[item.situacao_tarefa] %></td>
+                    <td><a href="/editar?id=<%= item.id_tarefa %>">Editar</a></td>
+                </tr>
+            <% 
+                });
+            }else{ %>
+                    <tr colspan="5">
+                        <td>Sem tarefas para exibir</td>
+                    </tr>
+            <% } %>
+        </tbody>
+    </table>
+
+    <% if(notificador){ %>
+        <nav>
+            <ul>
+                <%
+                for(var i = 1; i <= notificador.totalPaginas; i++){
+                    if(notificador.paginaAtual == i){    
+                    %>
+                        <li ><a class="atual" href="/?pagina=<%=i%>"><%=i%></a></li>
+                     <%
+                    }else{
+                    %>
+                        <li ><a href="/?pagina=<%=i%>"><%=i%></a></li>
+                    <%
+                    }
+                }
+                %>
+            </ul>
+        </nav>
+    <%  } %>
+
+
+
+</body>
+
+</html>
+
+<!--
+ pesquisar o módulo moment
+ uasr o moment para exibir a data 
+ no padrão pt-br
+  -->
